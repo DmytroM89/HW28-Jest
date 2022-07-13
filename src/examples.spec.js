@@ -1,39 +1,55 @@
 import {sum, sumSpread, minus, multiply, divide, pow, isBigger, isSmaller, getUserInfo} from './examples'
 
 describe('Sum', () => {
-    test('Should return the sum of two numbers', () => {
+    test('should be a function', () => {
+        expect(typeof sum).toBe('function');
+    });
+
+    test('should receive two numbers as arguments', () => {
+        expect(sum("a", true)).toBe("You must provide 2 numbers!");
+    });
+
+    test('should return the sum of two numbers', () => {
         expect(sum(2, 3)).toBe(5);
     });
 })
 
 describe('Sum spread', () => {
-    test('Should return the sum a few numbers', () => {
+    test('should return the sum a few numbers', () => {
         expect(sumSpread(2,3,5,6)).toBe(16);
+    });
+
+    test('should returned result not NaN', () => {
+        expect(sumSpread(2,3,5,6)).not.toBeNaN();
     });
 })
 
 describe('Minus', () => {
-    test('Should return the difference of numbers', () => {
+    test('should return the difference of numbers', () => {
         expect(minus(9, 10)).toBe(-1);
+    });
+
+    test('should receive two numbers as arguments', () => {
+        expect(minus("a", true)).toBe("You must provide 2 numbers!");
     });
 })
 
 describe('Multiply', () => {
-    test('Should return 4', () => {
+    test('should return 4', () => {
         expect(multiply(2, 2)).toBe(4);
     });
 
-    test('Should return zero', () => {
+    test('should return zero', () => {
         expect(multiply(2, 0)).toBe(0);
     });
 })
 
 describe('Divide', () => {
-    test('Should return 1', () => {
+    test('should return 1', () => {
         expect(divide(2, 2)).toBe(1);
     });
 
-    test('Should return error message Infinity', () => {
+    test('should return error message Infinity', () => {
         try {
             divide(4, 0);
         } catch(err) {
@@ -43,30 +59,45 @@ describe('Divide', () => {
 })
 
 describe('Pow', () => {
-    test('Should return 16', () => {
+    test('should return a number to the power', () => {
         expect(pow(2, 4)).toBe(16);
+    });
+
+    test('should returned result not NaN', () => {
+        expect(pow(2,3)).not.toBeNaN();
     });
 })
 
 describe('isBigger', () => {
-    test('Should return true', () => {
+    test('should return true if a > b else return false', () => {
         expect(isBigger(10, 2)).toBe(true);
+        expect(isBigger(2, 10)).toBe(false);
+    });
+
+    test('should returned result not NaN', () => {
+        expect(isBigger(2,3)).not.toBeTruthy();
     });
 })
 
 describe('isSmaller', () => {
-    test('Should return true', () => {
+    test('should return true if a < b else return false', () => {
         expect(isSmaller(2, 10)).toBe(true);
+        expect(isSmaller(222, 10)).toBe(false);
+    });
+
+    test('should returned result not NaN', () => {
+        expect(isSmaller(2,3)).toBeTruthy();
     });
 })
 
 describe('getUserInfo', () => {
-    test('Should check that the object that returns getUserInfo contains Vick in the fullName property', () => {
+    test('should check that the object that returns getUserInfo contains Vick in the fullName property', () => {
         const userObj = getUserInfo();
-        expect(userObj.fullName.includes('Vick')).toBe(true);
+        const fullName = userObj.fullName;
+        expect(fullName).toContain('Vick');
     });
 
-    test('Should return a correct user info', () => {
+    test('should return a correct user info', () => {
         const userObj = getUserInfo();
         expect(getUserInfo()).toEqual({
             fullName: 'Vick Jone',
